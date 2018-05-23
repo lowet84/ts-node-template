@@ -10,7 +10,5 @@ const port = 8088
 
 app.use(express.static('public'))
 var server = app.listen(port, function() {
-  var host = JSON.stringify(server.address())
-
-  console.log(`Example app listening at http://${host}:${port}`)
+  console.log(`Example app listening at port ${port}`)
 })
