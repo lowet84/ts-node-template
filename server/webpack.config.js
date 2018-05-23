@@ -6,8 +6,8 @@ module.exports = {
         /^[a-z\-0-9]+$/ // Ignore node_modules folder
     ],
     output: {
-        filename: 'compiled', // output file
-        path: `${root}/build`,
+        filename: 'server.js', // output file
+        path: `${root}/../dist`,
         libraryTarget: "commonjs"
     },
     resolve: {
