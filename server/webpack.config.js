@@ -1,37 +1,37 @@
-const root = require('app-root-path').path;
+const root = require("app-root-path").path
+var nodeExternals = require("webpack-node-externals")
+
+var fs = require("fs")
+var nodeModules = {}
+fs
+  .readdirSync("node_modules")
+  .filter(function(x) {
+    return [".bin"].indexOf(x) === -1
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = "commonjs " + mod
+  })
+
 module.exports = {
-    entry: `${root}/server.ts`,
-    target: 'node',
-    externals: [
-        /^[a-z\-0-9]+$/ // Ignore node_modules folder
-    ],
-    output: {
-        filename: 'server.js', // output file
-        path: `${root}/../dist`,
-        libraryTarget: "commonjs"
-    },
-    resolve: {
-        // Add in `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
-        modules: [
-            `${root}/node_modules`,
-            'node_modules'
-        ]
-    },
-    resolveLoader: {
-        //root: [`${root}/node_modules`],
-
-
-    },
-    module: {
-        rules: [{
-            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            test: /\.tsx?$/,
-            use: [
-                {
-                    loader: 'ts-loader',
-                }
-            ]
-        }]
-    }
-};
+  entry: "./server.ts",
+  output: {
+    path: root + "/../dist",
+    filename: "server.js"
+  },
+  resolve: {
+    // Add '.ts' and '.tsx' as a resolvable extension.
+    extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+  },
+  module: {
+    rules: [
+      // All files with a '.ts' or '.tsx'
+      // extension will be handled by 'ts-loader'
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader"
+      }
+    ]
+  },
+  target: "node"
+//   externals: [nodeExternals()]
+}

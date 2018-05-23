@@ -1,15 +1,19 @@
 {
-    "version": "2.4.2",
-    "compilerOptions": {
-        "lib": ["es5", "es6"],
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true
-    },
-    "exclude": [
-        "node_modules"
-    ]
+  "files": ["./server.ts"],
+  "include": ["./**/*.ts"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "target": "es6",
+    "outDir": "dist",
+    "rootDir": "server",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "*": ["node_modules/@types/*", "./typings/*"]
+    }
+  }
 }
