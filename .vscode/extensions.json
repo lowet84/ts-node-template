@@ -9,6 +9,7 @@
 		"octref.vetur",
 		"robertohuertasm.vscode-icons",
 		"liuji-jim.vue",
-		"hollowtree.vue-snippets"
+		"hollowtree.vue-snippets",
+		"rbbit.typescript-hero"
 	]
 }

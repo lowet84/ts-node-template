@@ -1,8 +1,9 @@
-import testRequest from 'requests/testRequest'
-import test from 'model/test'
+import test from '../../shared/model/test'
+import { handler } from './handler'
+import { testRequest } from '../../shared/requests/requests'
 
-class testHandler extends handler<testRequest, test> {
+export default class testHandler extends handler<testRequest, test> {
   handle(req: testRequest): test {
-    return new test('hej')
+    return new test(req.requestName)
   }
 }
