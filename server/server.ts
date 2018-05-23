@@ -1,9 +1,9 @@
-import * as express from "express"
+import * as express from 'express'
 
 var app = express()
 
-app.get("/", function(req, res) {
-  res.send("Hello World2")
+app.get('/api/', function(req, res) {
+  res.send('Hello World2')
 })
 
 const port = 8088
