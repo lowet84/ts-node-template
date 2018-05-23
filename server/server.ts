@@ -7,6 +7,7 @@ app.get('/api/', function(req, res) {
 })
 
 const port = 8081
+// const handlers = 
 
 app.use(express.static('public'))
 var server = app.listen(port, function() {

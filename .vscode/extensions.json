@@ -1,0 +1,14 @@
+{
+	// See http://go.microsoft.com/fwlink/?LinkId=827846
+	// for the documentation about the extensions.json format
+	"recommendations": [
+		// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+		"esbenp.prettier-vscode",
+		"miclo.sort-typescript-imports",
+		"pmneo.tsimporter",
+		"octref.vetur",
+		"robertohuertasm.vscode-icons",
+		"liuji-jim.vue",
+		"hollowtree.vue-snippets"
+	]
+}
