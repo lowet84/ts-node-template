@@ -8,5 +8,5 @@ var modelsCode = [].concat.apply([], models.map(d=>parseModel(d)));
 var controllers = findFiles('../server/controllers/')
 var controllersCode = controllers.map(d=>parseController(d))
 
-// console.log(modelsCode)
-// console.log(controllersCode)
+var code = modelsCode.join('\r\n') + controllersCode.join('\r\n')
+console.log(code)

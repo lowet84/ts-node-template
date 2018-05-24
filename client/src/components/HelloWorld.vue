@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { api } from '../api'
+import api,{ Test } from '../api'
 
 export default Vue.extend({
   name: 'HelloWorld',
@@ -36,8 +36,7 @@ export default Vue.extend({
   },
   methods: {
     async load() {
-      let data = await api.getTest()
-      console.log(data)
+      api.GetAllTests('dssdf',new Test('sdkufsdf'))
     }
   }
 })
