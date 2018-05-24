@@ -1,4 +1,5 @@
-export default class test{
+export class Test{
     constructor(public value: string) {
+        
     }
 }

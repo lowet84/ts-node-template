@@ -1,16 +1,21 @@
 {
-  "name": "ts-node",
+  "name": "ts-node-template",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":
-      "concurrently --kill-others \"cd client && npm run dev\" \"cd server && npm run dev\"",
-    "build": "cd client && npm run build && cd ..\\server && npm run build"
+    "dev": "concurrently --kill-others \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "build": "cd client && npm run build && cd ..\\server && npm run build",
+    "generate": "cd generator && ts-node generator.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^3.5.1"
+  },
+  "dependencies": {
+    "@types/node": "^10.1.2",
+    "ts-node": "^6.0.4",
+    "typescript": "^2.8.3"
   }
 }
