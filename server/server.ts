@@ -1,5 +1,8 @@
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
+import { Handler } from './Handler';
+import { TestController } from './controllers/TestController';
+import { OtherController } from './controllers/OtherController';
 
 var app = express()
 app.use( bodyParser.json() );  
@@ -8,8 +11,10 @@ app.use( bodyParser.json() );
 //   res.send('Hello World2')
 // })
 
+const handler = new Handler(new OtherController(), new TestController())
+
 app.post('/api/', function(req, res) {
-  res.send('Hello World2')
+  res.send(handler.handle(req.body.name, req.body.body))
 })
 
 const port = 8081

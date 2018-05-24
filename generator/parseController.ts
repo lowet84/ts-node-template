@@ -10,6 +10,10 @@ var getParameters = function(content: string): string[] {
   return parameters
 }
 
+function decapitalizeFirstLetter(string) {
+  return string.charAt(0).toLowerCase() + string.slice(1)
+}
+
 export default function(path) {
   var code = fs.readFileSync(path, 'utf8')
 
@@ -39,30 +43,34 @@ export default function(path) {
     }
   }
 
+  var controllerName = classLine.replace('export class ', '')
   var methodItems = methods.map(d => {
     return {
-      name: `${classLine.replace('export class ', '')}.${d.substring(
-        0,
-        d.indexOf('(')
-      )}`,
-      content: <string>(d.substring(0,d.lastIndexOf(':'))),
-      returnType: <string>(d.substring(d.lastIndexOf(':')+1).trim()),
+      name: `${d.substring(0, d.indexOf('('))}`,
+      content: <string>d.substring(0, d.lastIndexOf(':')),
+      returnType: <string>d.substring(d.lastIndexOf(':') + 1).trim(),
       parameters: getParameters(d)
     }
   })
-  var commands = methodItems.map(
+
+  var clientCommands = methodItems.map(
     d =>
-      `static async ${d.content}: Promise<${d.returnType}> { return (await axios.post('/api',{name:'${
-        d.name
-      }', body:{${d.parameters.map(e => `${e}:${e}`).join(',')}}})).data }`
+      `static async ${d.content}: Promise<${
+        d.returnType
+      }> { return (await axios.post('/api',{name:'${controllerName}.${d.name}', 
+      body:{${d.parameters.map(e => `${e}:${e}`).join(',')}}})).data }`
   )
 
-  var ret = ''
-  ret += "import axios from 'axios' \r\n"
-  ret += 'export default class Api{'
-  ret += commands.join('\r\n')
-  ret += '}'
+  var serverCommands = methodItems.map(
+    d => `case '${controllerName}.${d.name}':
+      return this.${decapitalizeFirstLetter(controllerName)}.${
+      d.name
+    }(${d.parameters.map(e => `body.${e.trim()}`).join(',')})`
+  )
 
-  return ret
+  return {
+    clientCommands: clientCommands.join('\r\n'),
+    serverCommands: serverCommands.join('\r\n'),
+    controller: {name: controllerName, path: path}
+  }
 }
-
