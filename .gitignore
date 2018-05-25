@@ -33,3 +33,6 @@ npm-debug.log
 .DS_Store
 
 /dist
+
+Api.ts
+Handler.ts

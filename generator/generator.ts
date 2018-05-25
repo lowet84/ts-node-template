@@ -27,11 +27,20 @@ function generate() {
 }
 
 var timeout = null
-var watcher = chokidar
-  .watch('../server/controllers/', {
-    persistent: true
-  })
-  .on('all', (event, path) => {
-    if (timeout) clearTimeout(timeout)
-    setTimeout(generate, 500, 'generate')
-  })
+
+let watch = process.argv.filter(d => d === '--watch').length > 0
+
+if (watch) {
+  console.log("Watching for code changes for generation...")
+  var watcher = chokidar
+    .watch('../server/controllers/', {
+      persistent: true
+    })
+    .on('all', (event, path) => {
+      if (timeout) clearTimeout(timeout)
+      setTimeout(generate, 500, 'generate')
+    })
+} else {
+  console.log("Generating code once...")
+  generate()
+}
