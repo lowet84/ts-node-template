@@ -6,6 +6,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
     "rootDir": "..",
     "sourceMap": true,
     "lib": [
