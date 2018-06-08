@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run generate\" \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "dev": "npm run generate && concurrently --kill-others \"npm run generate\" \"cd client && npm run dev\" \"cd server && npm run dev\"",
     "build": "cd generator && ts-node generator.ts && cd ..\\client && npm run build && cd ..\\server && npm run build",
-    "generate": "cd generator && ts-node generator.ts --watch"
+    "generate": "cd generator && ts-node generator.ts --watch",
+    "installAll": "npm install && cd server && npm install && cd ..\\client && npm install"
   },
   "author": "",
   "license": "ISC",
