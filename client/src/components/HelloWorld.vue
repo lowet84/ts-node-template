@@ -36,7 +36,7 @@ export default Vue.extend({
   },
   methods: {
     async load() {
-      var test = await api.GetAllTests('dssdf',new Test('sdkufsdf'))
+      var test = await api.GetTest('123')
       console.log(test)
     }
   }

@@ -1,7 +1,9 @@
 import { Test } from '../model/Test'
+import { TestRepository } from '../repository/TestRepository';
+
 export class TestController {
-  GetTest(): Test {
-    return new Test('lidjsidfj')
+  GetTest(id: string): Test {
+    return new Test(id)
   }
 
   GetAllTests(value: string, test: Test): Test[] {

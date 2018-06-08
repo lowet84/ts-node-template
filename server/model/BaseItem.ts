@@ -1,7 +1,7 @@
 export abstract class BaseItem{
-    public id: number
+    public id: string
 
     constructor() {
-        this.id = Number(Math.random().toString(36).substr(2, 16))
+        this.id = Math.random().toString(36).substr(2, 16)
     }
 }

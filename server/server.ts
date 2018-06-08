@@ -3,9 +3,9 @@ import * as bodyParser from 'body-parser'
 import { Handler } from './Handler'
 import { TestController } from './controllers/TestController'
 import { OtherController } from './controllers/OtherController'
-import tableGenerator from './tableGenerator'
+import { DbContext } from './database/DbContext'
 
-process.on('SIGTERM', function onSigterm () {
+process.on('SIGTERM', function onSigterm() {
   console.log('Got SIGTERM. Graceful shutdown start', new Date().toISOString())
   // start graceul shutdown here
 })
@@ -14,8 +14,8 @@ async function start() {
   // Database name
   let databaseName = 'tsNodeTemplate'
 
-  let hostName = process.argv[2] || 'localhost' 
-  let connection = await tableGenerator(hostName, databaseName)
+  let hostName = process.argv[2] || 'localhost'
+  await DbContext.initialize(hostName, databaseName)
   var app = express()
   app.use(bodyParser.json())
 
@@ -30,7 +30,6 @@ async function start() {
   })
 
   const port = 8081
-  // const handlers =
 
   app.use(express.static('public'))
   var server = app.listen(port, function() {
