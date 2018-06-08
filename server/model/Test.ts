@@ -1,5 +1,6 @@
-export class Test{
-    constructor(public value: string) {
-        
-    }
+import { BaseItem } from './BaseItem'
+export class Test extends BaseItem {
+  constructor(public value: string) {
+    super()
+  }
 }

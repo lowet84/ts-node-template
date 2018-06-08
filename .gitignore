@@ -36,3 +36,4 @@ npm-debug.log
 
 Api.ts
 Handler.ts
+tablesList.ts
