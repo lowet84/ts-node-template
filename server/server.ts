@@ -25,8 +25,8 @@ async function start() {
 
   const handler = new Handler(new OtherController(), new TestController())
 
-  app.post('/api/', function(req, res) {
-    res.send(handler.handle(req.body.name, req.body.body))
+  app.post('/api/', async function(req, res) {
+    res.send(await handler.handle(req.body.name, req.body.body))
   })
 
   const port = 8081

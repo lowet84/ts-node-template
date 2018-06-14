@@ -2,8 +2,8 @@ import { Test } from '../model/Test'
 import { TestRepository } from '../repository/TestRepository';
 
 export class TestController {
-  GetTest(id: string): Test {
-    return new Test(id)
+  async GetTest(id: string): Promise<Test> {
+    return await TestRepository.GetTest(id);
   }
 
   GetAllTests(value: string, test: Test): Test[] {

@@ -7,6 +7,7 @@
     "dev": "cd generator && ts-node generator.ts && cd .. && concurrently --kill-others \"npm run generate\" \"cd client && npm run dev\" \"cd server && npm run dev\"",
     "build": "cd generator && ts-node generator.ts && cd ..\\client && npm run build && cd ..\\server && npm run build",
     "generate": "cd generator && ts-node generator.ts --watch",
+    "generateOnce": "cd generator && ts-node generator.ts",
     "install-all": "npm install && cd server && npm install && cd ..\\client && npm install"
   },
   "author": "",

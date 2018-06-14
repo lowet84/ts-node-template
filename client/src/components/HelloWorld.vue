@@ -1,46 +1,30 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    {{msg.value}}
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import api,{ Test } from '../api'
+import api, { Test } from '../api'
+import Component from 'vue-class-component'
 
-export default Vue.extend({
-  name: 'HelloWorld',
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  created() {
-    this.load()
-  },
-  methods: {
-    async load() {
-      var test = await api.GetTest('123')
-      console.log(test)
-    }
+@Component({
+  props: {
+    propMessage: String
   }
 })
+export default class HelloWorld extends Vue {
+  msg = new Test('Loading...')
+
+  created() {
+    this.load()
+  }
+
+  async load() {
+    this.msg = await api.GetTest('123')
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,6 +1,11 @@
-import { Repository } from "./Repository";
-import { Test } from "../model/Test";
+import { Test } from '../model/Test'
+import { DbContext } from '../database/DbContext'
 
-export class TestRepository extends Repository<Test> {
-    tableName: string = 'Test'
+export class TestRepository {
+  public static async GetTest(id: string) {
+    return await DbContext.database
+      .table('Test')
+      .get<Test>(id)
+      .run(DbContext.connection)
+  }
 }

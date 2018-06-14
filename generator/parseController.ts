@@ -46,8 +46,8 @@ export default function(path) {
   var controllerName = classLine.replace('export class ', '')
   var methodItems = methods.map(d => {
     return {
-      name: `${d.substring(0, d.indexOf('('))}`,
-      content: <string>d.substring(0, d.lastIndexOf(':')),
+      name: `${d.substring(0, d.indexOf('(')).replace('async ','')}`,
+      content: <string>d.substring(0, d.lastIndexOf(':')).replace('async ',''),
       returnType: <string>d.substring(d.lastIndexOf(':') + 1).trim(),
       parameters: getParameters(d)
     }
@@ -60,10 +60,9 @@ export default function(path) {
       }> { return (await axios.post('/api',{name:'${controllerName}.${d.name}', 
       body:{${d.parameters.map(e => `${e}:${e}`).join(',')}}})).data }`
   )
-
   var serverCommands = methodItems.map(
     d => `case '${controllerName}.${d.name}':
-      return this.${decapitalizeFirstLetter(controllerName)}.${
+      return await this.${decapitalizeFirstLetter(controllerName)}.${
       d.name
     }(${d.parameters.map(e => `body.${e.trim()}`).join(',')})`
   )

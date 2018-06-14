@@ -15,7 +15,7 @@ export default function(
   server += '  constructor('
   server +=  controllers.map(d=>`private ${decapitalizeFirstLetter(d.name)}: ${d.name}`).join(',\r\n') //'    private testController: TestController,'
   server += '  ) {}\r\n'
-  server += 'handle(name: string, body: any): any {'
+  server += 'async handle(name: string, body: any): Promise<any> {'
   server += '  switch (name) {'
   server += serverCommands.join('\r\n')
   server += '  }'

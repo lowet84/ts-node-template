@@ -1,14 +1,10 @@
 import * as r from 'rethinkdb'
 import { tables } from '../Handler'
+import { connect } from 'http2';
 
 export class DbContext {
-  private static instance: r.Connection
-  public static connection(): r.Connection {
-    if (!this.instance) {
-      throw 'Context not initialized'
-    }
-    return this.instance
-  }
+  public static connection: r.Connection
+  public static database: r.Db 
 
   public static async initialize(hostName: string, databaseName: string) {
     console.log(`Connecting to database on ip:${hostName}`)
@@ -32,6 +28,7 @@ export class DbContext {
           .run(connection)
       }
     }
-    this.instance = connection
+    this.connection = connection
+    this.database = r.db(databaseName)
   }
 }
