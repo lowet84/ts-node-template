@@ -1,5 +1,4 @@
 import * as fs from 'fs'
-import { connect } from 'http2'
 
 var getParameters = function(content: string): string[] {
   var parameters = content

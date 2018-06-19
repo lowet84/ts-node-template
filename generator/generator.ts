@@ -3,11 +3,10 @@ import parseModel from './parseModel'
 import parseController from './parseController'
 import client from './client'
 import server from './server'
-import * as path from 'path'
 import * as fs from 'fs'
 import * as chokidar from 'chokidar'
-import { TIMEOUT } from 'dns'
 import tables from './tables'
+import vuex from './vuex'
 
 function generate() {
   var models = findFiles('../server/model/')
@@ -26,7 +25,9 @@ function generate() {
 
   var clientOutput = client(clientCode, modelsCode)
   var serverOutput = server(serverCode, controllerItems, tablesCode)
+  var vuexResult = vuex()
 
+  fs.writeFileSync('../client/src/store/StoreHelper.ts', vuexResult)
   fs.writeFileSync('../server/Handler.ts', serverOutput)
   fs.writeFileSync('../client/src/Api.ts', clientOutput)
 }
@@ -38,9 +39,12 @@ let watch = process.argv.filter(d => d === '--watch').length > 0
 if (watch) {
   console.log('Watching for code changes...')
   var watcher = chokidar
-    .watch(['../server/controllers/','../server/model/'], {
-      persistent: true
-    })
+    .watch(
+      ['../server/controllers/', '../server/model/', '../client/src/store'],
+      {
+        persistent: true
+      }
+    )
     .on('all', (event, path) => {
       if (timeout) clearTimeout(timeout)
       setTimeout(generate, 1000, 'generate')

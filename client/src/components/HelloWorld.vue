@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    {{msg.value}}
+    {{test}}
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import api, { Test } from '../api'
 import Component from 'vue-class-component'
+import { StoreHelper } from '../store/StoreHelper'
 
 @Component({
   props: {
@@ -16,13 +17,18 @@ import Component from 'vue-class-component'
 })
 export default class HelloWorld extends Vue {
   msg = new Test('Loading...')
+  helper = new StoreHelper(this.$store)
 
   created() {
     this.load()
   }
 
+  get test() {
+    return this.helper.getters.text()
+  }
+
   async load() {
-    this.msg = await api.GetTest('123')
+    this.msg = await this.helper.actions.loadText('123')
   }
 }
 </script>
