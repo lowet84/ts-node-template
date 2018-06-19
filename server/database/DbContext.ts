@@ -1,6 +1,5 @@
 import * as r from 'rethinkdb'
 import { tables } from '../Handler'
-import { connect } from 'http2';
 
 export class DbContext {
   public static connection: r.Connection
